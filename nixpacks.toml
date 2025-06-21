@@ -17,8 +17,7 @@ nixPkgs = ["nodejs", "pnpm"]
 # The --frozen-lockfile flag ensures we use the exact versions from our lockfile.
 # No surprise guest appearances from rogue packages!
 cmds = ["pnpm install --frozen-lockfile"]
-npm warn config production Use `--omit=dev` instead.
-npm warn exec The following package was not found and will be installed: serve@14.2.4
+
 [phases.build]
 # Time to build our masterpiece!
 # This command compiles our Svelte app into a lean, mean, production-ready machine.
