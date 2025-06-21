@@ -16,8 +16,7 @@ nixPkgs = ["nodejs", "pnpm"]
 # This is where we get all our dependencies in a row.
 # The --frozen-lockfile flag ensures we use the exact versions from our lockfile.
 # No surprise guest appearances from rogue packages!
-# We also install serve globally to serve our static files
-cmds = ["pnpm install --frozen-lockfile", "pnpm add -g serve"]
+cmds = ["pnpm install --frozen-lockfile"]
 
 [phases.build]
 # Time to build our masterpiece!
@@ -30,6 +29,7 @@ cmds = ["pnpm run build"]
 # We're using 'serve' to host our static files from the dist directory
 # The -s flag enables single-page application mode (client-side routing)
 # The -l flag sets the port from the PORT environment variable
+# npx will download and run serve without needing a global install
 cmd = "npx serve -s dist -l ${PORT:-8424}"
 
 [variables]
