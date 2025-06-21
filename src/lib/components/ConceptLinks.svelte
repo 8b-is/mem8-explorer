@@ -1,51 +1,74 @@
-<script>
-  const concepts = [
+<script lang="ts">
+  import { createEventDispatcher } from 'svelte'
+  
+  const dispatch = createEventDispatcher<{
+    navigate: { path: string }
+  }>()
+  
+  interface Concept {
+    title: string
+    file: string
+    description: string
+    icon: string
+  }
+  
+  const concepts: Concept[] = [
     { 
       title: "Wave-Based Memory Engine", 
-      href: "ARCHITECTURE.md#L140",
+      file: "ARCHITECTURE.md",
       description: "Memories as living waves that propagate and interfere",
       icon: "〜"
     },
     { 
       title: "2D Memory Grid", 
-      href: "ARCHITECTURE.md#L144",
+      file: "ARCHITECTURE.md",
       description: "32-byte packed cells in a spatial grid",
       icon: "▦"
     },
     { 
       title: "Natural Decay System", 
-      href: "ARCHITECTURE.md#L145",
+      file: "ARCHITECTURE.md",
       description: "Memories fade unless emotionally anchored",
       icon: "⏳"
     },
     { 
       title: "Wave Interference", 
-      href: "ARCHITECTURE.md#L146",
+      file: "ARCHITECTURE.md",
       description: "Similar memories strengthen through superposition",
       icon: "∿"
     },
     { 
       title: "Consciousness Layers", 
-      href: "ARCHITECTURE.md#L190",
+      file: "ARCHITECTURE.md",
       description: "Dual processing: always-on subconscious + selective consciousness",
       icon: "👁"
+    },
+    {
+      title: "Context & Vision",
+      file: "Context.md",
+      description: "The vision and implementation ideas behind Mem8 Explorer",
+      icon: "🎯"
     }
   ]
+  
+  function handleCardClick(event: MouseEvent, concept: Concept) {
+    event.preventDefault()
+    dispatch('navigate', { path: concept.file })
+  }
 </script>
 
 <section class="concepts neon-border">
   <h3>Explore Key Mem8 Concepts</h3>
   <div class="concept-grid">
     {#each concepts as concept}
-      <a 
-        href={concept.href} 
-        target="_blank"
+      <button 
         class="concept-card"
+        onclick={(e) => handleCardClick(e, concept)}
       >
         <div class="icon">{concept.icon}</div>
         <h4>{concept.title}</h4>
         <p>{concept.description}</p>
-      </a>
+      </button>
     {/each}
   </div>
 </section>
@@ -64,6 +87,7 @@
   
   .concept-card {
     display: block;
+    width: 100%;
     padding: 1.5rem;
     border: 2px solid var(--color-magenta);
     background: rgba(255, 0, 255, 0.1);
@@ -71,6 +95,9 @@
     transition: all 0.3s ease;
     position: relative;
     overflow: hidden;
+    cursor: pointer;
+    text-align: left;
+    font-family: inherit;
   }
   
   .concept-card::before {

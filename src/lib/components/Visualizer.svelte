@@ -1,8 +1,8 @@
-<script>
+<script lang="ts">
   import { onMount } from 'svelte'
   
-  let canvas
-  let animationFrame
+  let canvas: HTMLCanvasElement
+  let animationFrame: number
   let time = $state(0)
   let mouseX = $state(0)
   let mouseY = $state(0)
@@ -13,7 +13,13 @@
   const waveSpeed = 0.002
   const dampening = 0.98
   
-  let grid = Array(gridSize).fill(null).map(() => 
+  interface GridCell {
+    height: number
+    velocity: number
+    color: { r: number; g: number; b: number }
+  }
+  
+  let grid: GridCell[][] = Array(gridSize).fill(null).map(() => 
     Array(gridSize).fill(null).map(() => ({
       height: 0,
       velocity: 0,
@@ -21,13 +27,13 @@
     }))
   )
   
-  function handleMouseMove(event) {
+  function handleMouseMove(event: MouseEvent) {
     const rect = canvas.getBoundingClientRect()
     mouseX = event.clientX - rect.left
     mouseY = event.clientY - rect.top
   }
   
-  function drawGrid(ctx) {
+  function drawGrid(ctx: CanvasRenderingContext2D) {
     ctx.clearRect(0, 0, canvas.width, canvas.height)
     
     // Draw grid cells
@@ -56,10 +62,13 @@
       }
     }
     
-    // Draw wave equation
-    ctx.font = '12px Press Start 2P'
+    // Draw wave equation - keep pixel font for this special element
+    ctx.font = '11px Press Start 2P'
     ctx.fillStyle = '#FFFF00'
+    ctx.shadowBlur = 3
+    ctx.shadowColor = '#FFFF00'
     ctx.fillText('M(x,t) = A(x,t)e^(i(ωt-kx)) · D(t) · E(x,t)', 10, canvas.height - 20)
+    ctx.shadowBlur = 0
   }
   
   function updateWaves() {
@@ -96,6 +105,8 @@
     if (!canvas) return
     
     const ctx = canvas.getContext('2d')
+    if (!ctx) return
+    
     time++
     
     updateWaves()
@@ -123,6 +134,9 @@
     <canvas 
       bind:this={canvas}
       onmousemove={handleMouseMove}
+      onmouseenter={handleMouseEnter}
+      onmouseleave={handleMouseLeave}
+      onclick={handleClick}
       class="memory-grid"
     ></canvas>
     <div class="controls">

@@ -1,0 +1,77 @@
+/*
+ * components.css - Component-specific overrides for better readability
+ * While maintaining the retro aesthetic!
+ */
+
+/* Buttons should be readable but still retro */
+button, .button, .demo-button, .water-button, .close-button {
+  font-family: var(--font-body) !important;
+  font-size: 0.9rem !important;
+  font-weight: 700;
+  letter-spacing: 1px;
+  text-transform: uppercase;
+}
+
+/* Form controls */
+select, input, textarea {
+  font-family: var(--font-body) !important;
+  font-size: 0.9rem !important;
+}
+
+/* Navigation and menu items */
+.nav-item, .menu-item {
+  font-family: var(--font-body);
+  font-weight: 700;
+}
+
+/* Canvas overlays should use readable fonts */
+.controls, .instructions, .memory-details, .info-panel {
+  font-family: var(--font-body) !important;
+}
+
+/* Keep pixel font for special UI elements */
+.logo, .hero h1, .wave-equation {
+  font-family: var(--font-retro) !important;
+}
+
+/* Improve contrast for better readability */
+.memory-details p, .info-panel p, .explanation p {
+  color: var(--color-cyan);
+  text-shadow: 0 0 3px rgba(0, 255, 255, 0.5);
+  line-height: 1.8;
+}
+
+/* Make links more visible */
+a {
+  font-weight: 700;
+  text-decoration: underline;
+  text-decoration-style: dotted;
+}
+
+/* Improve list readability */
+.info-panel ul li, .explanation ul li {
+  line-height: 1.8;
+  margin-bottom: 0.75em;
+}
+
+/* Code and technical text */
+.technical-text, .wave-pattern-text {
+  font-family: var(--font-code);
+  font-size: 0.95rem;
+}
+
+/* Ensure good contrast on dark backgrounds */
+.neon-border p, .neon-border li {
+  color: var(--color-cyan);
+  text-shadow: 0 0 2px rgba(0, 255, 255, 0.3);
+}
+
+/* Animation for emphasis without losing readability */
+@keyframes subtle-pulse {
+  0%, 100% { opacity: 1; }
+  50% { opacity: 0.85; }
+}
+
+.emphasize {
+  animation: subtle-pulse 2s ease-in-out infinite;
+}

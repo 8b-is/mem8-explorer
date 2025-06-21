@@ -1,8 +1,15 @@
 import { defineConfig } from 'vite'
 import { svelte } from '@sveltejs/vite-plugin-svelte'
+import path from 'path'
 
 export default defineConfig({
   plugins: [svelte()],
+  publicDir: 'public',
+  resolve: {
+    alias: {
+      $lib: path.resolve('./src/lib')
+    }
+  },
   server: {
     port: 3000,
     open: true
@@ -12,7 +19,9 @@ export default defineConfig({
     rollupOptions: {
       output: {
         manualChunks: {
-          'three': ['three']
+          'three': ['three'],
+          'markdown': ['marked', 'dompurify'],
+          'mermaid': ['mermaid']
         }
       }
     }

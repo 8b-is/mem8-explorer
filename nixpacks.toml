@@ -1,0 +1,32 @@
+# Nixpacks configuration for Mem8 Explorer
+# This enables faster, more reliable deployments on Railway, Render, and other platforms
+# 🚀 Deploy faster than a neon sign flickers in cyberspace!
+
+[phases.setup]
+# Node.js will be auto-detected, pnpm will be installed via packageManager field
+nixPkgs = ["nodejs"]
+
+[phases.install]
+# pnpm will be used automatically based on packageManager in package.json
+cmds = ["pnpm install --frozen-lockfile"]
+
+[phases.build]
+# Build the Svelte app for production
+cmds = ["pnpm run build"]
+
+[start]
+# Serve the static files using Vite's preview server
+cmd = "pnpm run preview --host 0.0.0.0 --port ${PORT:-8424}"
+
+[variables]
+# Standard Node.js production environment
+NODE_ENV = "production"
+CI = "true"
+
+# Custom variables for Mem8 Explorer
+PUBLIC_URL = "/"
+VITE_MEM8_API_URL = "${MEM8_API_URL:-http://localhost:8420}"
+VITE_ENABLE_EFFECTS = "${ENABLE_EFFECTS:-true}"
+
+# Use latest Node.js LTS (20)
+NIXPACKS_NODE_VERSION = "20"

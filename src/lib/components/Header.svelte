@@ -1,4 +1,4 @@
-<script>
+<script lang="ts">
   let taglines = [
     "An 80's Inspired Dive into a Modern Memory System",
     "Where Waves Meet Neon Dreams",

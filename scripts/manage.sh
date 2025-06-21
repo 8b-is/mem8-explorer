@@ -9,6 +9,11 @@
 # #                                                                            #
 # # Now powered by Svelte 5! Because static files are so 2024...              #
 # #                                                                            #
+# # NEW FEATURES:                                                              #
+# # - Memory Timeline Viewer: See your memories evolve over time!             #
+# # - Smart Tree Demo: Experience the IoT plant monitoring project!           #
+# # - Wave Pattern Analyzer: Watch waves interfere and decay in real-time!    #
+# #                                                                            #
 # # Brought to you by Aye & Hue, with special thanks to Trish for keeping our  #
 # # spirits (and spreadsheets) high!                                         #
 # ##############################################################################
@@ -92,6 +97,26 @@ install_dependencies() {
         print_success "Dependencies installed successfully!"
     else
         print_error "Failed to install dependencies!"
+        return 1
+    fi
+}
+
+# Function to update all packages to latest
+update_packages() {
+    print_header "Updating All Packages to Latest"
+    check_pnpm || return 1
+    
+    cd "$PROJECT_ROOT_DIR"
+    echo -e "${CYAN}Updating all packages to their latest versions...${NC}"
+    echo -e "${YELLOW}This may take a moment while we fetch the freshest bytes from the internet!${NC}"
+    
+    pnpm update --latest --interactive false
+    
+    if [ $? -eq 0 ]; then
+        print_success "All packages updated to latest versions!"
+        echo -e "${BLUE}Remember to test everything after major updates!${NC}"
+    else
+        print_error "Failed to update packages!"
         return 1
     fi
 }
@@ -228,12 +253,13 @@ show_menu() {
     echo -e "  ${YELLOW}2)${NC} ${GREEN}Build${NC} Create production build"
     echo -e "  ${YELLOW}3)${NC} ${GREEN}Preview${NC} Preview production build"
     echo -e "  ${YELLOW}4)${NC} ${GREEN}Install${NC} Install dependencies"
-    echo -e "  ${YELLOW}5)${NC} ${GREEN}Check${NC} Run type checking"
-    echo -e "  ${YELLOW}6)${NC} ${GREEN}Clean${NC} Remove build artifacts"
+    echo -e "  ${YELLOW}5)${NC} ${GREEN}Update${NC} Update all packages to latest"
+    echo -e "  ${YELLOW}6)${NC} ${GREEN}Check${NC} Run type checking"
+    echo -e "  ${YELLOW}7)${NC} ${GREEN}Clean${NC} Remove build artifacts"
     echo -e "${PURPLE}--- Docker Operations ---${NC}"
-    echo -e "  ${YELLOW}7)${NC} ${GREEN}Docker Build${NC} Build Docker image"
-    echo -e "  ${YELLOW}8)${NC} ${GREEN}Docker Run${NC} Run in Docker container"
-    echo -e "  ${YELLOW}9)${NC} ${GREEN}Docker Stop${NC} Stop Docker container"
+    echo -e "  ${YELLOW}8)${NC} ${GREEN}Docker Build${NC} Build Docker image"
+    echo -e "  ${YELLOW}9)${NC} ${GREEN}Docker Run${NC} Run in Docker container"
+    echo -e "  ${YELLOW}0)${NC} ${GREEN}Docker Stop${NC} Stop Docker container"
     echo -e "${PURPLE}-------------------------------------------------------${NC}"
     echo -e "  ${YELLOW}q)${NC} ${RED}Quit${NC} (Return to the mundane world)"
     echo -e "${PURPLE}-------------------------------------------------------${NC}"
@@ -259,19 +285,22 @@ if [[ "$1" == "" ]]; then
             4|install)
                 install_dependencies
                 ;;
-            5|check)
+            5|update)
+                update_packages
+                ;;
+            6|check)
                 check_project
                 ;;
-            6|clean)
+            7|clean)
                 clean_project
                 ;;
-            7|docker-build)
+            8|docker-build)
                 docker_build
                 ;;
-            8|docker-run)
+            9|docker-run)
                 docker_run
                 ;;
-            9|docker-stop)
+            0|docker-stop)
                 docker_stop
                 ;;
             q|quit)
@@ -300,6 +329,9 @@ else
         install)
             install_dependencies
             ;;
+        update)
+            update_packages
+            ;;
         check)
             check_project
             ;;
@@ -317,7 +349,7 @@ else
             ;;
         *)
             print_error "Unknown command: $1"
-            echo "Usage: $0 [dev|build|preview|install|check|clean|docker-build|docker-run|docker-stop]"
+            echo "Usage: $0 [dev|build|preview|install|update|check|clean|docker-build|docker-run|docker-stop]"
             exit 1
             ;;
     esac
