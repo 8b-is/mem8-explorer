@@ -4,29 +4,33 @@
 
 # We're explicitly defining our providers here for maximum clarity and reliability.
 # It's like telling the roadies exactly where to put the amps.
-providers = ["node"]
+providers = ["node", "staticfile"]
 
 [phases.setup]
 # Here we're making sure we have the right tools for the job.
 # Node.js is our stage, and pnpm is our trusty roadie.
+# We also install a static file server for production
 nixPkgs = ["nodejs", "pnpm"]
 
 [phases.install]
 # This is where we get all our dependencies in a row.
 # The --frozen-lockfile flag ensures we use the exact versions from our lockfile.
 # No surprise guest appearances from rogue packages!
-cmds = ["pnpm install --frozen-lockfile"]
+# We also install serve globally to serve our static files
+cmds = ["pnpm install --frozen-lockfile", "pnpm add -g serve"]
 
 [phases.build]
 # Time to build our masterpiece!
 # This command compiles our Svelte app into a lean, mean, production-ready machine.
+# The output goes to the 'dist' directory as configured in vite.config.js
 cmds = ["pnpm run build"]
 
 [start]
 # And now for the main event! This is how we start the show.
-# We're using the built Node.js server for production deployment.
-# The adapter-node creates a server at build/index.js
-cmd = "node build/index.js"
+# We're using 'serve' to host our static files from the dist directory
+# The -s flag enables single-page application mode (client-side routing)
+# The -l flag sets the port from the PORT environment variable
+cmd = "npx serve -s dist -l ${PORT:-8424}"
 
 [variables]
 # These are the environment variables that our app will use.
@@ -36,11 +40,9 @@ CI = "true"
 PUBLIC_URL = "/"
 VITE_MEM8_API_URL = "${MEM8_API_URL:-http://localhost:8428}"
 VITE_ENABLE_EFFECTS = "${ENABLE_EFFECTS:-true}"
-# Add these for proper Node.js adapter configuration
+# Add these for proper static server configuration
 HOST = "0.0.0.0"
 PORT = "${PORT:-8424}"
-# Body size limit for the server (optional, but good to have)
-BODY_SIZE_LIMIT = "10000000"
 
 # We're pinning to Node.js LTS version 20 and PNPM 9.
 # It's the sweet spot of stability and modern features.
