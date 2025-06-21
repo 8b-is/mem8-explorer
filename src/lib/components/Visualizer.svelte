@@ -33,6 +33,37 @@
     mouseY = event.clientY - rect.top
   }
   
+  function handleMouseEnter(event: MouseEvent) {
+    // Optional: Add visual feedback when mouse enters the grid
+    console.log('Mouse entered the grid')
+  }
+  
+  function handleMouseLeave(event: MouseEvent) {
+    // Optional: Reset or pause effects when mouse leaves
+    console.log('Mouse left the grid')
+  }
+  
+  function handleClick(event: MouseEvent) {
+    // Create a bigger ripple on click
+    const rect = canvas.getBoundingClientRect()
+    const clickX = event.clientX - rect.left
+    const clickY = event.clientY - rect.top
+    const gridX = Math.floor(clickX / cellSize)
+    const gridY = Math.floor(clickY / cellSize)
+    
+    if (gridX >= 0 && gridX < gridSize && gridY >= 0 && gridY < gridSize) {
+      // Create a stronger wave on click
+      grid[gridY][gridX].velocity += 2.0
+      
+      // Optional: Change color on click
+      grid[gridY][gridX].color = { 
+        r: Math.random() * 100, 
+        g: 200 + Math.random() * 55, 
+        b: 200 + Math.random() * 55 
+      }
+    }
+  }
+  
   function drawGrid(ctx: CanvasRenderingContext2D) {
     ctx.clearRect(0, 0, canvas.width, canvas.height)
     
