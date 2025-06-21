@@ -1,0 +1,179 @@
+/*
+ * global.css - The digital wardrobe for our Mem8 Explorer!
+ * Let's make it look like it just stepped out of a 1980s arcade.
+ * Cue the synthwave!
+ */
+
+@import url('https://fonts.googleapis.com/css2?family=Press+Start+2P&display=swap');
+
+/* --- CSS Variables for our 80s color palette --- */
+:root {
+  --color-black: #000000;
+  --color-green: #00FF00;
+  --color-magenta: #FF00FF;
+  --color-cyan: #00FFFF;
+  --color-yellow: #FFFF00;
+  --color-white: #FFFFFF;
+  --color-gray: #AAAAAA;
+  --color-dark-bg: rgba(10, 10, 10, 0.5);
+  
+  --font-retro: 'Press Start 2P', monospace, sans-serif;
+  --glow-magenta: 0 0 15px #FF00FF, inset 0 0 10px #FF00FF;
+  --glow-cyan: 0 0 5px #00FFFF, 0 0 10px #00FFFF;
+}
+
+/* --- Global Styles & Resets --- */
+* {
+  box-sizing: border-box;
+}
+
+body {
+  background-color: var(--color-black);
+  color: var(--color-green);
+  font-family: var(--font-retro);
+  margin: 0;
+  padding: 0;
+  min-height: 100vh;
+  font-size: 14px;
+  line-height: 1.6;
+  overflow-x: hidden;
+}
+
+/* A little CRT effect for that authentic retro feel */
+.crt-effect::before {
+  content: " ";
+  display: block;
+  position: fixed;
+  top: 0;
+  left: 0;
+  bottom: 0;
+  right: 0;
+  background: linear-gradient(rgba(18, 16, 16, 0) 50%, rgba(0, 0, 0, 0.25) 50%), 
+              linear-gradient(90deg, rgba(255, 0, 0, 0.06), rgba(0, 255, 0, 0.02), rgba(0, 0, 255, 0.06));
+  z-index: 2;
+  background-size: 100% 2px, 3px 100%;
+  pointer-events: none;
+  animation: flicker 0.15s infinite;
+}
+
+@keyframes flicker {
+  0% { opacity: 0.27861; }
+  5% { opacity: 0.34769; }
+  10% { opacity: 0.23604; }
+  15% { opacity: 0.90626; }
+  20% { opacity: 0.18128; }
+  25% { opacity: 0.83891; }
+  30% { opacity: 0.65583; }
+  35% { opacity: 0.67807; }
+  40% { opacity: 0.26559; }
+  45% { opacity: 0.84693; }
+  50% { opacity: 0.96019; }
+  55% { opacity: 0.08594; }
+  60% { opacity: 0.20313; }
+  65% { opacity: 0.71988; }
+  70% { opacity: 0.53455; }
+  75% { opacity: 0.37288; }
+  80% { opacity: 0.71428; }
+  85% { opacity: 0.70419; }
+  90% { opacity: 0.7003; }
+  95% { opacity: 0.36108; }
+  100% { opacity: 0.24387; }
+}
+
+/* --- Typography --- */
+h1, h2, h3, h4, h5, h6 {
+  color: var(--color-magenta);
+  text-shadow: 2px 2px var(--color-cyan);
+  margin: 0 0 0.5em 0;
+  font-weight: normal;
+}
+
+h1 {
+  font-size: 2em;
+  text-align: center;
+  letter-spacing: 2px;
+  animation: glow 2s ease-in-out infinite alternate;
+}
+
+@keyframes glow {
+  from { text-shadow: 2px 2px var(--color-cyan), 0 0 10px var(--color-magenta); }
+  to { text-shadow: 2px 2px var(--color-cyan), 0 0 20px var(--color-magenta), 0 0 30px var(--color-magenta); }
+}
+
+h2 {
+  font-size: 1.5em;
+  border-bottom: 2px solid var(--color-cyan);
+  padding-bottom: 5px;
+  margin-top: 1.5em;
+}
+
+h3 {
+  font-size: 1.2em;
+  color: var(--color-yellow);
+  text-shadow: 1px 1px var(--color-magenta);
+}
+
+p {
+  margin: 0 0 1em 0;
+}
+
+a {
+  color: var(--color-cyan);
+  text-decoration: none;
+  font-weight: bold;
+  transition: all 0.3s ease;
+}
+
+a:hover {
+  color: var(--color-white);
+  text-decoration: underline;
+  text-shadow: var(--glow-cyan);
+}
+
+ul {
+  list-style-type: square;
+  padding-left: 20px;
+  margin: 0 0 1em 0;
+}
+
+li {
+  margin-bottom: 0.5em;
+}
+
+/* --- Utility Classes --- */
+.neon-border {
+  border: 2px solid var(--color-magenta);
+  box-shadow: var(--glow-magenta);
+  background-color: var(--color-dark-bg);
+  padding: 1.5rem;
+  margin-bottom: 2rem;
+}
+
+.grid-background {
+  background: repeating-linear-gradient(
+    45deg,
+    #050505,
+    #050505 10px,
+    #101010 10px,
+    #101010 20px
+  );
+}
+
+/* --- Scrollbar Styling --- */
+::-webkit-scrollbar {
+  width: 12px;
+}
+
+::-webkit-scrollbar-track {
+  background: var(--color-black);
+  border: 1px solid var(--color-magenta);
+}
+
+::-webkit-scrollbar-thumb {
+  background: var(--color-cyan);
+  border: 1px solid var(--color-magenta);
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: var(--color-magenta);
+}

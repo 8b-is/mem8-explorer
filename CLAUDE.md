@@ -8,7 +8,7 @@ All development commands go through the interactive `scripts/manage.sh`:
 
 ```bash
 # Interactive mode (recommended)
-./scripts/manage.sh                    # Opens colorful menu
+./scripts/manage.sh                    # Opens colorful menu with humor and pizzazz
 
 # Direct commands
 ./scripts/manage.sh dev                # Start development server
@@ -18,8 +18,12 @@ All development commands go through the interactive `scripts/manage.sh`:
 ./scripts/manage.sh check              # Run type checking
 ./scripts/manage.sh clean              # Clean build artifacts
 
-# Note: Script uses pnpm as the package manager
-# Make sure pnpm is installed: npm install -g pnpm
+# Additional commands via pnpm
+pnpm run check:watch                   # Continuous type checking
+
+# Requirements
+# - Node.js 18+ required
+# - pnpm package manager (install: npm install -g pnpm)
 ```
 
 ## Architecture Overview

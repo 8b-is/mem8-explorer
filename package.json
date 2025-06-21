@@ -1,0 +1,30 @@
+{
+  "name": "mem8-explorer",
+  "version": "0.1.0",
+  "private": true,
+  "description": "An 80's inspired web explorer for the Mem8 memory system",
+  "type": "module",
+  "packageManager": "pnpm@9.15.5",
+  "scripts": {
+    "dev": "vite",
+    "build": "vite build",
+    "preview": "vite preview",
+    "check": "svelte-check --tsconfig ./tsconfig.json",
+    "check:watch": "svelte-check --tsconfig ./tsconfig.json --watch"
+  },
+  "devDependencies": {
+    "@sveltejs/adapter-node": "^5.2.10",
+    "@sveltejs/vite-plugin-svelte": "^5.0.3",
+    "@tsconfig/svelte": "^5.0.4",
+    "svelte": "^5.16.2",
+    "svelte-check": "^4.1.2",
+    "typescript": "^5.7.3",
+    "vite": "^6.0.7"
+  },
+  "dependencies": {
+    "three": "^0.172.0"
+  },
+  "engines": {
+    "node": ">=18"
+  }
+}
