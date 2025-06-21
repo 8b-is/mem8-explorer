@@ -4,7 +4,7 @@ import path from 'path'
 
 export default defineConfig({
   plugins: [svelte()],
-  publicDir: 'public',
+  publicDir: 'static',
   resolve: {
     alias: {
       $lib: path.resolve('./src/lib')
