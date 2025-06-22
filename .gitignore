@@ -35,3 +35,4 @@ backup/
 
 # TypeScript
 *.tsbuildinfo
+mem8-explorer/**
