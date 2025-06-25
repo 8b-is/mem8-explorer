@@ -23,7 +23,7 @@
 /* --- CSS Variables for themes --- */
 :root {
   /* Default theme (full-experience) */
-  --scanline-delay: 0s; /* Will be overridden by JS */
+  --scanline-delay: 5s; /* Will be overridden by JS */
   --color-black: #000000;
   --color-green: #00FF00;
   --color-magenta: #00FF00;
@@ -309,9 +309,9 @@ body {
   z-index: 3;
   pointer-events: none;
   animation: 
-    scanline-movement 20s cubic-bezier(0.4, 0, 0.6, 1) infinite,
-    scanline-opacity 3s ease-in-out infinite;
-  animation-delay: var(--scanline-delay, 0s), 0s;
+    scanline-movement 2s cubic-bezier(0.4, 0, 0.6, 1) infinite,
+    scanline-opacity 1s ease-in-out infinite;
+  animation-delay: var(--scanline-delay, 2s), 5s;
 }
 
 @keyframes scanline-movement {
@@ -336,30 +336,30 @@ body {
 }
 
 @keyframes scanline-opacity {
-  0% { opacity: 0.25; }
-  20% { opacity: 0.6; }
-  35% { opacity: 0.3; }
-  50% { opacity: 0.75; }
-  65% { opacity: 0.4; }
-  80% { opacity: 0.55; }
-  100% { opacity: 0.25; }
+  0% { opacity: 0.15; }
+  20% { opacity: 0.15; }
+  35% { opacity: 0.45; }
+  50% { opacity: 0.15; }
+  65% { opacity: 0.15; }
+  80% { opacity: 0.05; }
+  100% { opacity: 0.5; }
 }
 
 
 @keyframes flicker {
-  0% { opacity: 0.97; }
-  8.33% { opacity: 0.95; }
-  16.66% { opacity: 0.98; }
-  25% { opacity: 0.93; }
-  33.33% { opacity: 0.96; }
-  41.66% { opacity: 0.94; }
-  50% { opacity: 0.98; }
-  58.33% { opacity: 0.95; }
-  66.66% { opacity: 0.97; }
-  75% { opacity: 0.94; }
-  83.33% { opacity: 0.96; }
-  91.66% { opacity: 0.95; }
-  100% { opacity: 0.97; }
+  0% { opacity: 0.64; }
+  8.33% { opacity: 0.64; }
+  16.66% { opacity: 0.64; }
+  25% { opacity: 0.64; }
+  33.33% { opacity: 0.64; }
+  41.66% { opacity: 0.64; }
+  50% { opacity: 0.65; }
+  58.33% { opacity: 0.64; }
+  66.66% { opacity: 0.64; }
+  75% { opacity: 0.64; }
+  83.33% { opacity: 0.64; }
+  91.66% { opacity: 0.64; }
+  100% { opacity: 0.64; }
 }
 
 /* --- Typography --- */

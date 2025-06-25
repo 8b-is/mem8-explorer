@@ -6,8 +6,15 @@ import App from './App.svelte'
 console.log('Main.js loaded')
 
 // Set random scanline delay before app starts (0-12 seconds for 16s cycle)
-const randomDelay = Math.random() * 12
-document.documentElement.style.setProperty('--scanline-delay', `${randomDelay}s`)
+setTimeout(() => {
+  const randomDelay = Math.random() * 50
+  const randomOpacity = Math.random() * 0.01
+  const randomMovement = Math.random() * 0.5  
+  document.documentElement.style.setProperty('--scanline-delay', `${randomDelay}s`)
+  document.documentElement.style.setProperty('--scanline-opacity', `${randomOpacity}`)
+  document.documentElement.style.setProperty('--scanline-movement', `${randomMovement}`)
+}, 1000)
+
 
 // Wait for DOM to be ready
 function init() {
