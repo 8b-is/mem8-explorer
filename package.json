@@ -22,7 +22,7 @@
     "vite": "^6.3.5"
   },
   "dependencies": {
-    "dompurify": "^3.2.6",
+    "dompurify": "^3.4.17",
     "marked": "^15.0.12",
     "mermaid": "^11.7.0",
     "three": "^0.177.0"

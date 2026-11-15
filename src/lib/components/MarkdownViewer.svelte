@@ -1,7 +1,7 @@
 <script lang="ts">
   import { onMount, tick } from 'svelte'
   import { marked } from 'marked'
-  import mermaid from 'mermaid'
+  import mermaid, { type MermaidConfig } from 'mermaid'
   import DOMPurify from 'dompurify'
   import { createEventDispatcher } from 'svelte'
   
@@ -23,7 +23,7 @@
   $effect(() => {
     const currentTheme = document.documentElement.getAttribute('data-theme') || 'full-crt'
     
-    const themeConfigs = {
+    const themeConfigs: Record<string, MermaidConfig> = {
       'white': {
         theme: 'default',
         themeVariables: {
@@ -229,8 +229,7 @@
   marked.setOptions({
     renderer: renderer,
     breaks: true,
-    gfm: true,
-    langPrefix: 'language-' // Ensure language prefix for code blocks
+    gfm: true
   })
   
   async function loadContent() {
@@ -538,11 +537,11 @@
     })
     
     // Find all mermaid code blocks - try multiple selectors
-    let mermaidBlocks = container.querySelectorAll('pre code.language-mermaid')
+    let mermaidBlocks = Array.from(container.querySelectorAll('pre code.language-mermaid'))
     
     // If not found, try alternative selectors
     if (mermaidBlocks.length === 0) {
-      mermaidBlocks = container.querySelectorAll('code.language-mermaid')
+      mermaidBlocks = Array.from(container.querySelectorAll('code.language-mermaid'))
     }
     
     // Also check for code blocks that contain mermaid syntax
